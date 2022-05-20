@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const schema = mongoose.Schema;
 
-export const courseJsModel = new schema({
+const courseJsModel = new schema({
   courseId: {
     type: String,
     required: true,
@@ -18,4 +18,9 @@ export const courseJsModel = new schema({
     type: String,
     required: true,
   },
+  image: {
+    type: String,
+  },
 });
+
+module.exports = mongoose.model('jsData', courseJsModel);
