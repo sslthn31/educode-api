@@ -2,6 +2,9 @@ const mongoose = require('mongoose');
 const schema = mongoose.Schema;
 
 const observerData = new schema({
+  course: {
+    type: String,
+  },
   ipAdress: {
     type: String,
   },

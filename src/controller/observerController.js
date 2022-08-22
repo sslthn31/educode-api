@@ -3,11 +3,13 @@ const path = require('path');
 const fs = require('fs');
 
 exports.createNewCourse = (req, res) => {
+  const course = req.body.course;
   const ipAdress = req.body.ipAdress;
   const question = req.body.question;
   const startedAt = req.body.startedAt;
 
   const newPost = new observerData({
+    course: course,
     ipAdress: ipAdress,
     question: question,
     startedAt: startedAt,
@@ -74,6 +76,7 @@ exports.getCourseById = (req, res) => {
 exports.updateCourseData = (req, res) => {
   const dataId = req.params.dataId;
 
+  const course = req.body.course;
   const ipAdress = req.body.ipAdress;
   const question = req.body.question;
   const startedAt = req.body.startedAt;
@@ -81,6 +84,7 @@ exports.updateCourseData = (req, res) => {
   observerData
     .findById(dataId)
     .then((post) => {
+      post.course = course;
       post.ipAdress = ipAdress;
       post.question = question;
       post.startedAt = startedAt;
