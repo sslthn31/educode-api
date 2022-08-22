@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const observerController = require('../controller/observerController')
 
+const app = express();
+
 // JS
 router.post('/observer', observerController.createNewCourse);
 router.get('/observer', observerController.getAllCourse);

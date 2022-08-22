@@ -6,6 +6,7 @@ const path = require('path');
 
 const dummyRouter = require('./src/routes/dummyRoutes');
 const courseRouter = require('./src/routes/courseRoutes');
+const observerRouter = require('./src/routes/observerRoutes');
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -46,8 +47,13 @@ app.get('/', (req, res) => {
   res.send('Sup Dude');
 });
 
+app.get('/v1/view', (req, res) => {
+  res.send('ey man');
+});
+
 app.use('/v1/dummy', dummyRouter);
 app.use('/v1/course', courseRouter);
+app.use('/v1/view', observerRouter);
 
 mongoose
   .connect(database)

@@ -1,16 +1,16 @@
 const mongoose = require('mongoose');
 const schema = mongoose.Schema;
 
-const courseHtmlModel = new schema({
+const observerData = new schema({
   ipAdress: {
     type: String,
   },
   question: {
-    type: String,
+    type: Array,
   },
   startedAt: {
     type: String,
   },
 });
 
-module.exports = mongoose.model('htmlData', courseHtmlModel);
+module.exports = mongoose.model('observerData', observerData);
