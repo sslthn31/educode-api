@@ -36,10 +36,15 @@ app.use(bodyParser.json());
 app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use(multer({ storage: fileStorage, fileFilter: fileFilter }).single('image'));
 app.use((req, res, next) => {
+  var origin = req.get('origin');
+  res.setHeader('Access-Control-Allow-Origin', origin); //agar semua website bisa akses API kita
   res.setHeader('Access-Control-Allow-Origin', '*'); //agar semua website bisa akses API kita
   res.setHeader('Access-Control-Allow-Methods', 'POST, GET, PUT, PATCH, DELETE, OPTIONS');
   res.setHeader('Access-Control-Allow-Credentials', 'true');
   res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  res.setHeader('Access-Control-Allow-Headers', '*');
+  res.setHeader('Content-Length', 0);
+  res.setHeader('Content-Type', 'text/plain');
   next();
 });
 
