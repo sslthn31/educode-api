@@ -59,21 +59,33 @@ exports.getAllCourse = (req, res) => {
     });
 };
 
+const mongoose = require('mongoose');
+
 exports.getCourseById = (req, res) => {
   const dataId = req.params.dataId;
 
   courseJsData
-    .findById(dataId)
+    .find({ courseId: dataId }) // Use courseId in the query
     .then((result) => {
-      res.status(201).json({
-        message: 'data ditemukan',
+      if (result.length === 0) {
+        return res.status(404).json({
+          message: 'Data not found',
+        });
+      }
+
+      res.status(200).json({
+        message: 'Data found',
         data: result,
       });
     })
     .catch((err) => {
-      console.log(`error : ${err}`);
+      console.error(`Error: ${err}`);
+      res.status(500).json({
+        message: 'Internal Server Error',
+      });
     });
 };
+
 
 exports.updateCourseData = (req, res) => {
   const dataId = req.params.dataId;

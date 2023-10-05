@@ -61,16 +61,25 @@ exports.getCourseById = (req, res) => {
   const dataId = req.params.dataId;
 
   courseCssData
-    .findById(dataId)
-    .then((result) => {
-      res.status(201).json({
-        message: 'data ditemukan',
-        data: result,
+  .find({ courseId: dataId }) // Use courseId in the query
+  .then((result) => {
+    if (result.length === 0) {
+      return res.status(404).json({
+        message: 'Data not found',
       });
-    })
-    .catch((err) => {
-      console.log(`error : ${err}`);
+    }
+
+    res.status(200).json({
+      message: 'Data found',
+      data: result,
     });
+  })
+  .catch((err) => {
+    console.error(`Error: ${err}`);
+    res.status(500).json({
+      message: 'Internal Server Error',
+    });
+  });
 };
 
 exports.updateCourseData = (req, res) => {
